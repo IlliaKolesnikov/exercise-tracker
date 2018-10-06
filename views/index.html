@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Exercise Tracker | Free Code Camp</title>
+      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
+     
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+      <div class="container">
+         <h1>Exercise tracker</h1>
+        <div class="row d-flex align-items-end ">
+          
+       
+          <form class="col bg-warning rounded mr-2 d-flex flex-column" action="/api/exercise/new-user" method="post">
+            <h3>Create a New User</h3>
+            <p ><code class="text-dark">POST /api/exercise/new-user</code></p>
+            <input id="uname" type="text" class="form-control w-75 mb-2" name="username" placeholder="username">
+            <input type="submit" class="btn mb-2" value="Submit">
+          </form>
+        
+          
+          <form class="col bg-danger d-flex mr-2 flex-column rounded" action="/api/exercise/add" method="post">
+            <h3>Add exercises</h3>
+            <p class=""><code class="text-dark">POST /api/exercise/add</code></p>
+            <input id="uid" type="text" class="form-control w-75 mb-2" name="userId" placeholder="userId*">
+            <input id="desc" type="text" class="form-control rounded w-75 mb-2" name="description" placeholder="description*">
+            <input id="dur" type="text" class="form-control rounded w-75 mb-2" name="duration" placeholder="duration* (mins.)">
+            <input id="dat" type="text" class="form-control rounded w-75 mb-2" name="date" placeholder="date (mm-dd-yyyy)">
+            <input type="submit" class="btn mb-2" value="Submit">
+          </form>
+          
+          <form class="col bg-success d-flex flex-column rounded" action="/api/exercise/log" method="post">
+            <h3>Get user's exercise log</h3>
+            <p class=""><code class="text-dark">POST /api/exercise/log</code></p>
+            <input type="text" class="form-control w-75 mb-2" name="userId" placeholder="userId*">
+            <input  type="text" class="form-control rounded w-75 mb-2" name="from" placeholder="from">
+            <input  type="text" class="form-control rounded w-75 mb-2" name="to" placeholder="to">
+            <input type="submit" class="btn mb-2" value="Submit">
+          </form>
+        </div>     
+           
+      </div>
+   </body>
+
+</html>
