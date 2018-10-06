@@ -27,7 +27,6 @@ app.post('/api/exercise/new-user', (req,res, next)=>{
   user.save(function(err){
   if(err) {
       if(err.code == 11000) {
-
         return next({
           status: 400,
           message: 'username already taken'
@@ -44,35 +43,35 @@ app.post('/api/exercise/new-user', (req,res, next)=>{
 
   app.post('/api/exercise/add', (req, res, next)=>{
     Person.findById(req.body.userId, (err, user) => {
-    if(err) return next(err)
-    if(!user) {
-      return next({
-        status: 400,
-        message: 'unknown _id'
-      })
-    }
-    const exercise = new Exercise(req.body)
-    exercise.username = user.username
-      if(!exercise.date){
-        exercise.date = new Date()
-      }
-    exercise.save((err, savedExercise) => {
-      console.log(savedExercise.date);
       if(err) return next(err)
-      savedExercise = savedExercise.toObject()
-      delete savedExercise.__v
-      savedExercise._id = savedExercise.userId
-      savedExercise.date = savedExercise.date.toDateString();
-      delete savedExercise.userId
-      res.json(savedExercise)
-    })
+      if(!user) {
+        return next({
+          status: 400,
+          message: 'unknown _id'
+        })
+      }
+      const exercise = new Exercise(req.body)
+      exercise.username = user.username
+        if(!exercise.date){
+          exercise.date = new Date()
+        }
+      exercise.save((err, savedExercise) => {
+        console.log(savedExercise.date);
+        if(err) return next(err)
+        savedExercise = savedExercise.toObject()
+        delete savedExercise.__v
+        savedExercise._id = savedExercise.userId
+        savedExercise.date = savedExercise.date.toDateString();
+        delete savedExercise.userId
+        res.json(savedExercise)
+      })
   })
     
   })
 
 app.post('/api/exercise/log', (req, res)=>{
   if(req.body.from == undefined && req.body.to == undefined) 
-  res.redirect(`?userId=${req.body.userId}`)
+    res.redirect(`?userId=${req.body.userId}`)
   else if(req.body.from== undefined)
     res.redirect(`?userId=${req.body.userId}&to=${req.body.to}`)
   else if(req.body.to==undefined)
@@ -92,18 +91,16 @@ app.get('/api/exercise/log', (req, res)=>{
                      $lt: checkTo(to)
                    }
                   }, (err, elem)=>{
-      
-      const out = {
-        _id: user._id,
-        userName: user.userName,
-        count: elem.length,
-        log: elem.map(item=>({
-          description: item.description,
-          date: item.date.toDateString(),
-          duration: item.duration         
-          }) 
-                    )
-      }
+                      const out = {
+                        _id: user._id,
+                        userName: user.userName,
+                        count: elem.length,
+                        log: elem.map(item=>({
+                          description: item.description,
+                          date: item.date.toDateString(),
+                          duration: item.duration         
+                          }) 
+                                    )}
       res.json(out);
   })
   })
