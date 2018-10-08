@@ -8,7 +8,7 @@ const cors = require('cors')
 
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect('mongodb://sprite:Frank764@ds121343.mlab.com:21343/exercise-tracker-git')
 
 app.use(cors())
 
